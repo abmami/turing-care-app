@@ -1,0 +1,231 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} View Patients | TurningCare {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div class="d-block mb-4 mb-md-0">
+        <nav aria-label="breadcrumb" class=" d-md-inline-block">
+            <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'home' %}">
+                        <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                            </path>
+                        </svg>
+                    </a>
+                </li>
+                <li class="breadcrumb-item"><a href="{% url 'view_patients' %}">Patients</a></li>
+                <li class="breadcrumb-item active" aria-current="page">View Patients</li>
+            </ol>
+        </nav>
+        <h2 class="h4">All Patients</h2>
+        <p class="mb-0"></p>
+    </div>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a href="{% url 'add_patient' %}" class="btn btn-md btn-gray-800 d-inline-flex align-items-center">
+            <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
+                </path>
+            </svg>
+            Add Patient
+        </a>
+      
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 col-sm-6 col-xl-4 mb-4">
+        <div class="card border-0 shadow">
+            <div class="card-body">
+                <div class="row d-block d-xl-flex align-items-center">
+                    <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                        <div class="icon-shape icon-shape-primary rounded me-4 me-sm-0">
+                            <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                        </div>
+                        <div class="d-sm-none">
+                            <h2 class="h5">Total Patients</h2>
+                            <h3 class="fw-extrabold mb-1">{{ kpis.total_patients }}</h3>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-7 px-xl-0">
+                        <div class="d-none d-sm-block">
+                            <h2 class="h6 text-gray-400 mb-0">Total Patients</h2>
+                            <h3 class="fw-extrabold mb-2">{{ kpis.total_patients }}</h3>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-4 mb-4">
+        <div class="card border-0 shadow">
+            <div class="card-body">
+                <div class="row d-block d-xl-flex align-items-center">
+                    <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                        <div class="icon-shape icon-shape-secondary rounded me-4 me-sm-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
+                                <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                              </svg>                        </div>
+                        <div class="d-sm-none">
+                            <h2 class="fw-extrabold h5">Recent Added Patient</h2>
+                            {% if kpis.recent_added_patient != 'Unavailable' %}
+                            <a href="{% url 'view_patient' kpis.recent_added_patient %}" class="">
+                                <h3 class="mb-1">PA-{{ kpis.recent_added_patient }}</h3>
+                            </a>
+                            {% else %}
+                            <a href="#" class="">
+                                <h3 class="mb-1">None</h3>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-7 px-xl-0">
+                        <div class="d-none d-sm-block">
+                            <h2 class="h6 text-gray-400 mb-0">Recent Added Patient</h2>
+                    
+                            {% if kpis.recent_added_patient != 'Unavailable' %}
+                            <a href="{% url 'view_patient' kpis.recent_added_patient %}" class="">
+                                <h3 class="fw-extrabold mb-2">PA-{{ kpis.recent_added_patient }}</h3>
+                            </a>
+                            {% else %}
+                            <a href="#" class="">
+                                <h3 class="mb-1">None</h3>
+                            </a>
+                            {% endif %}
+                        </div>
+              
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-xl-4 mb-4">
+        <div class="card border-0 shadow">
+            <div class="card-body">
+                <div class="row d-block d-xl-flex align-items-center">
+                    <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                        <div class="icon-shape icon-shape-tertiary rounded me-4 me-sm-0">
+                            <svg class="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 0l-2 2a1 1 0 101.414 1.414L8 10.414l1.293 1.293a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        </div>
+                        <div class="d-sm-none">
+                            <h2 class="fw-extrabold h5">Recent X-R Patient</h2>
+
+                            {% if kpis.recent_xr_patient != 'Unavailable' %}
+                            <a href="{% url 'view_patient' kpis.recent_xr_patient %}" class="">
+                                <h3 class="fw-extrabold mb-2">PA-{{ kpis.recent_xr_patient }}</h3>
+                            </a>
+                            {% else %}
+                            <a href="#" class="">
+                                <h3 class="mb-1">None</h3>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-7 px-xl-0">
+                        <div class="d-none d-sm-block">
+                            <h2 class="h6 text-gray-400 mb-0">Recent X-R Patient</h2>
+                    
+                            {% if kpis.recent_xr_patient != 'Unavailable' %}
+                            <a href="{% url 'view_patient' kpis.recent_xr_patient %}" class="">
+                                <h3 class="fw-extrabold mb-2">PA-{{ kpis.recent_xr_patient }}</h3>
+                            </a>
+                            {% else %}
+                            <a href="#" class="">
+                                <h3 class="mb-1">None</h3>
+                            </a>
+                            {% endif %}
+                        </div>
+           
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-settings mb-4">
+    <div class="row align-items-center justify-content-between">
+        <div class="col col-md-6 col-lg-3 col-xl-4">
+            <div class="input-group me-2 me-lg-3 fmxw-400">
+                <span class="input-group-text">
+                    <svg class="icon icon-xs" x-description="Heroicon name: solid/search"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </span>
+                <input type="text" class="form-control" placeholder="Search patients">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="card card-body  shadow table-wrapper table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="border-gray-200">#</th>
+                <th class="border-gray-200">First Name</th>
+                <th class="border-gray-200">Last Name</th>
+                <th class="border-gray-200">Phone</th>
+                <th class="border-gray-200">Email</th>
+                <th class="border-gray-200">Added On</th>
+                <th class="border-gray-200"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Item -->
+            {% for patient in patients %}
+            <tr>
+                <td>
+                    <a href="{% url 'view_patient' patient.id %}" class="fw-bold">
+                        PA-{{patient.id}}
+                    </a>
+                </td>
+
+                <td><span class="fw-bold ">{{patient.first_name}}</span></td>
+                <td><span class="fw-bold ">{{patient.last_name}}</span></td>
+                
+                <td><span class="fw-normal">{{patient.phone}}</span></td>
+                <td><span class="fw-normal">{{patient.email}}</span></td>
+                <td><span class="fw-normal">{{patient.created_at|date:'Y-m-d H:i'}}</span></td>
+               
+                <td>
+                    <a href="{% url 'view_patient' patient.id %}" class="me-3">
+                        <i class="bi bi-eye" style="font-size: 1.2rem; color: cornflowerblue;"></i> View Record
+                    </a>
+
+                    <a href="{% url 'update_patient' patient.id %}" class="me-3">
+                        <i class="bi bi-pencil-square" style="font-size: 1.2rem; color: orange;"></i> Update
+                    </a>
+                    
+                    <a href="{% url 'delete_patient' patient.id %}" class="me-3">
+                        <i class="bi bi-trash" style="font-size: 1.2rem; color: red;"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+         
+
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

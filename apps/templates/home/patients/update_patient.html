@@ -1,0 +1,235 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Update Patient | TurningCare{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="py-4">
+    <nav aria-label="breadcrumb" class=" d-md-inline-block">
+        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+            <li class="breadcrumb-item">
+                <a href="{% url 'home' %}">
+                    <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                </a>
+            </li>
+            <li class="breadcrumb-item"><a href="{% url 'view_patients' %}">Patients</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update Patient</li>
+        </ol>
+    </nav>
+    <div class="d-flex justify-content-between w-100 flex-wrap">
+        <div class="mb-3 mb-lg-0">
+            <h1 class="h4">Update Patient : PA-{{patient.id}}</h1>
+            <p class="mb-0">Fill in the form with the patient's informations.</p>
+        </div>
+
+    </div>
+</div>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div>
+        <div class="dropdown">
+            <a href="{% url 'add_patient' %}" class="btn btn-secondary d-inline-flex align-items-center me-2 animate-up-2"
+                aria-haspopup="true" aria-expanded="false">
+                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                New Patient
+            </a>
+            <a href="{% url 'view_patients' %}" class="btn btn-primary d-inline-flex align-items-center  animate-up-2"
+                aria-haspopup="true" aria-expanded="false">
+                View Patients
+            </a>
+
+        </div>
+    </div>
+    <div>
+        <a href="{% url 'delete_patient' patient.id %}" type="button"
+            class="btn btn-danger d-inline-flex align-items-center me-2 animate-up-2">
+            <svg class="dropdown-icon text-black-400 me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                <path
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+            </svg>Delete</a>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="col-12 col-xl-12">
+            <div class="card card-body border-0 shadow mb-4 ">
+                <h2 class="h5 mb-4">General information</h2>
+                <form action="{% url 'add_patient' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            
+                            <div>
+                                <label for="{{ form.first_name.id_for_label }}" class="form-label">{{ form.first_name.label }} </label>
+                                <input name="{{ form.first_name.html_name }}" type="text" placeholder="" class="form-control" id="{{ form.first_name.id_for_label }}" value="{{ patient.first_name}}" required></input>
+                                {% if form.first_name.help_text %}
+                                <div class="form-text">{{ form.first_name.help_text }}</div>
+                                {% endif %}
+                                {% for error in form.first_name.errors %}
+                                <div class="invalid-feedback d-block text-end">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div>
+                                <label for="{{ form.last_name.id_for_label }}" class="form-label">{{ form.last_name.label }} </label>
+                                <input name="{{ form.last_name.html_name }}" type="text" placeholder="" class="form-control" id="{{ form.last_name.id_for_label }}" value="{{ patient.last_name}}" required>
+                                {% if form.last_name.help_text %}
+                                <div class="form-text">{{ form.last_name.help_text }}</div>
+                                {% endif %}
+                                {% for error in form.last_name.errors %}
+                                <div class="invalid-feedback d-block text-end">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.gender.id_for_label }}" class="form-label">{{ form.gender.label }} </label>
+                            <select class="form-select w-100 mb-0" id="{{ form.gender.id_for_label }}" name="{{ form.gender.html_name }}"
+                            aria-label="" value="{{ patient.gender}}" required>
+                            {% for choice in form.gender.field.choices %}
+                            <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                            {% endfor %}
+                      
+                         </select>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-3 mb-3">
+                            <label for="{{ form.birthday.id_for_label }}" class="form-label">{{ form.birthday.label }} </label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </span>
+                          
+                                <input data-datepicker="" name="{{ form.birthday.html_name }}" type="text" placeholder="dd/mm/yyyy" class="form-control" id="{{ form.birthday.id_for_label }}">
+                                {% if form.birthday.help_text %}
+                                <div class="form-text">{{ form.birthday.help_text }}</div>
+                                {% endif %}
+                                {% for error in form.birthday.errors %}
+                                <div class="invalid-feedback d-block text-end">{{ error }}</div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <div class="form-group">
+                                <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }} </label>
+                                <input name="{{ form.email.html_name }}" type="email" placeholder="" class="form-control" id="{{ form.email.id_for_label }}" value="{{ patient.email}}">
+                                {% if form.email.help_text %}
+                                <div class="form-text">{{ form.email.help_text }}</div>
+                                {% endif %}
+                                {% for error in form.email.errors %}
+                                <div class="invalid-feedback d-block text-end">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label for="{{ form.phone.id_for_label }}" class="form-label">{{ form.phone.label }} </label>
+                                <input name="{{ form.phone.html_name }}" type="number" placeholder="" class="form-control" id="{{ form.phone.id_for_label }}" value="{{ patient.phone}}">
+                                {% if form.phone.help_text %}
+                                <div class="form-text">{{ form.phone.help_text }}</div>
+                                {% endif %}
+                                {% for error in form.phone.errors %}
+                                <div class="invalid-feedback d-block text-end">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <h2 class="h5 my-4">Location</h2>
+                    <div class="row">
+                        <div class="col-sm-4 mb-3">
+                            <div class="form-group">
+                                <label for="{{ form.address.id_for_label }}" class="form-label">{{ form.address.label }} </label>
+                                <input name="{{ form.address.html_name }}" type="text" placeholder="" class="form-control" id="{{ form.address.id_for_label }}" value="{{ patient.address}}">
+                                {% if form.address.help_text %}
+                                <div class="form-text">{{ form.address.help_text }}</div>
+                                {% endif %}
+                                {% for error in form.address.errors %}
+                                <div class="invalid-feedback d-block text-end">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <div class="form-group">
+                                <label for="{{ form.city.id_for_label }}" class="form-label">{{ form.city.label }} </label>
+                                <input name="{{ form.city.html_name }}" type="text" placeholder="" class="form-control" id="{{ form.city.id_for_label }}" value="{{ patient.city}}">
+                                {% if form.city.help_text %}
+                                <div class="form-text">{{ form.city.help_text }}</div>
+                                {% endif %}
+                                {% for error in form.city.errors %}
+                                <div class="invalid-feedback d-block text-end">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <label for="{{ form.state.id_for_label }}" class="form-label">{{ form.state.label }} </label>
+                         
+                            <select class="form-select w-100 mb-0" id="{{ form.state.id_for_label }}" name="{{ form.state.html_name }}" value="{{ patient.state}}"
+                                aria-label="">
+                                {% for choice in form.state.field.choices %}
+                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                {% endfor %}
+                          
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="{{ form.zip_code.id_for_label }}" class="form-label">{{ form.zip_code.label }} </label>
+                                <input name="{{ form.zip_code.html_name }}" type="text" placeholder="" class="form-control" id="{{ form.zip_code.id_for_label }}" value="{{ patient.zip_code}}">
+                                {% if form.zip_code.help_text %}
+                                <div class="form-text">{{ form.zip_code.help_text }}</div>
+                                {% endif %}
+                                {% for error in form.zip_code.errors %}
+                                <div class="invalid-feedback d-block text-end">{{ error }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                        <a href="{% url 'view_patients' %}" class="btn btn-md btn-primary mt-2 animate-up-2">
+
+                            Back
+                        </a>
+
+                        <button class="btn btn-md btn-success mt-2 animate-up-2" type="submit">Save</button>
+                    </div>
+
+
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

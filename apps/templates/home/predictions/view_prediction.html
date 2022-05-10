@@ -1,0 +1,153 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} View Prediction | TuringCare {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<div class="py-1">
+    <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+            <li class="breadcrumb-item">
+                <a href="{% url 'home' %}">
+                    <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                </a>
+            </li>
+            <li class="breadcrumb-item"><a href="{% url 'view_predictions' %}">Predictions</a></li>
+            <li class="breadcrumb-item active" aria-current="page">View Prediction</li>
+        </ol>
+    </nav>
+    <div class="d-flex justify-content-between w-100 flex-wrap">
+        <div class="mb-3 mb-lg-0">
+            <h1 class="h4">Prediction Details </h1>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div>
+        <div class="dropdown">
+            <a href="{% url 'new_prediction' %}" class="btn btn-secondary d-inline-flex align-items-center me-2"
+                aria-haspopup="true" aria-expanded="false">
+                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                New Prediction
+            </a>
+            <a href="{% url 'view_predictions' %}" class="btn btn-primary d-inline-flex align-items-center  "
+                aria-haspopup="true" aria-expanded="false">
+                View Predictions
+            </a>
+
+        </div>
+    </div>
+    <div>
+        <a href="{% url 'delete_prediction' prediction.id %}" type="button"
+            class="btn btn-danger d-inline-flex align-items-center me-2">
+            <svg class="dropdown-icon text-black-400 me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                <path
+                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+            </svg>Delete</a>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="col-12 col-xl-12">
+            <div class="card card-body border-0 shadow mb-4  ">
+
+                <h2 class="h5 mb-4">Interpretation</h2>
+                {% if prediction %}
+
+                <div class="row mb-md-2">
+                    <div class="col-auto mt-2">
+                        <ul class="list-group list-group-flush ">
+                            <li class="list-group-item"><strong class="fw-black">Prediction:</strong>
+                                PRED-{{prediction.id}}</li>
+                            <li class="list-group-item"><strong class="fw-black">Date:</strong>
+                                {{prediction.created_at|date:'Y-m-d H:i' }}</li>
+                            <li class="list-group-item"><strong class="fw-black">Dominant Class:</strong>
+                                {{prediction.dominant_class}}</li>
+                            <li class="list-group-item"><strong class="fw-black">Patient :</strong>
+                                {% if prediction.patient  %}
+                                {{ prediction.patient.first_name }} {{ prediction.patient.last_name }}
+                                {% else %}
+                                Unassigned
+                                {% endif%}
+                            </li>
+                            <li class="list-group-item"><strong class="fw-black">Feedback :</strong>
+                                {{ prediction.model_feedback }}</li>
+                            <!--<li class="list-group-item"><strong class="fw-black">Comment :</strong> {{ prediction.comment }}</li>-->
+                        </ul>
+                    </div>
+
+                    <div class="col-auto mt-2 ">
+                        <p><strong class="fw-black">Chest X-Ray</strong></p>
+                        <img src="{{ prediction.uploaded_image.url}}" alt="" style="width:300px;height:300px;">
+                    </div>
+                    <div class="col-auto mt-2 ">
+                        <p><strong class="fw-black">Heatmap</strong></p>
+                        <img src="{{ prediction.heatmap.url}}" alt="" style="width:300px;height:300px;">
+                    </div>
+                    <div class="col-12 col-md-4 mt-2">
+                        <p><strong class="fw-black">Results</strong></p>
+                        {% for class, prob in results.items %}
+                        <div class="row mt-4">
+                            <div class="progress-wrapper">
+                                <div class="progress-info">
+                                    <div class="h6 mb-0">{{class}}</div>
+                                    <div class="small fw-bold text-gray-500"><span>{{ prob|floatformat:3 }} %</span>
+                                    </div>
+                                </div>
+                                <div class="progress mb-0">
+                                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{prob}}"
+                                        aria-valuemin="0" aria-valuemax="100" style="width: {{prob}}%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+                {% else %}
+                <p>No results yet</p>
+                {% endif %}
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

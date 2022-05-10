@@ -1,0 +1,227 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} View Patient | TuringCare {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="py-2">
+    <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+            <li class="breadcrumb-item">
+                <a href="{% url 'home' %}">
+                    <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                </a>
+            </li>
+            <li class="breadcrumb-item"><a href="{% url 'view_patients' %}">Patients</a></li>
+            <li class="breadcrumb-item active" aria-current="page">View Patient</li>
+        </ol>
+    </nav>
+    <div class="d-flex justify-content-between w-100 flex-wrap">
+        <div class="mb-3 mb-lg-0">
+            <h1 class="h4">Patient's Record : PA-{{patient.id}}</h1>
+            <p class="mb-0"></p>
+        </div>
+
+    </div>
+</div>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div>
+        <div class="dropdown">
+            <a href="{% url 'add_patient' %}" class="btn btn-secondary d-inline-flex align-items-center me-2" aria-haspopup="true" aria-expanded="false">
+                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                New Patient
+            </a>
+            <a href="{% url 'view_patients' %}" class="btn btn-primary d-inline-flex align-items-center  " aria-haspopup="true" aria-expanded="false">
+                View Patients
+            </a>
+        
+        </div>
+    </div>
+    <div>
+        <a href="{% url 'delete_patient' patient.id %}" type="button" class="btn btn-danger d-inline-flex align-items-center me-2">
+            <svg class="dropdown-icon text-black-400 me-2"  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+              </svg>Delete</a>
+ 
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="col-12 col-xl-12">
+            <div class="card card-body border-0 shadow mb-4 ">
+                <h2 class="h5 mb-4">General information</h2>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3 ">
+
+                        <div>
+                            <label class="form-label fw-black">Full Name :</label>
+                            {{patient.first_name}} {{patient.last_name}}
+
+                        </div>
+                        <div>
+                            <label class="form-label fw-black">Gender :</label>
+                            {{patient.gender}}
+
+                        </div>
+                        <div>
+                            <label class="form-label fw-black">Birthday :</label>
+                            {{patient.birthday}}
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 mb-3 ">
+
+                        <div>
+                            <label class="form-label fw-black">Email :</label>
+                            {{patient.email}}
+
+                        </div>
+                        <div>
+                            <label class="form-label fw-black">Phone :</label>
+                            {{patient.phone}}
+
+                        </div>
+                        <div>
+                            <label class="form-label fw-black">Status :</label>
+                            {{patient.status}}
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 mb-3 ">
+
+                        <div>
+                            <label class="form-label fw-black">Address :</label>
+                            {{patient.address}}
+
+                        </div>
+                        <div>
+                            <label class="form-label fw-black">City :</label>
+                            {{patient.city}}
+
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3 ">
+                        <div>
+                            <label class="form-label fw-black">State :</label>
+                            {{patient.state}}
+
+                        </div>
+                        <div>
+                            <label class="form-label fw-black">ZIP :</label>
+                            {{patient.zip_code}}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between w-100 flex-wrap mb-sm-2 mb-md-4">
+    <div class="mb-3 mb-lg-0">
+        <h1 class="h4">Chest X-Rays Predictions</h1>
+        <p class="mb-0"></p>
+    </div>
+
+</div>
+<div class="row m-3">
+    <div class=" d-flex justify-content-between w-100 flex-wrap  mb-4">
+        <div class="col-12 col-xl-12">
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                {% for prediction in predictions %}
+                {% if prediction.uploaded_image and prediction.status != "deleted" %}
+                <div class="col">
+                    <div class="card h-100">
+                        
+                            
+                          
+                                <div class="col text-end m-2">
+                                    <button class="btn btn-gray-800 d-inline-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
+                                      
+                                        <svg class="icon icon-xs ms-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    </button>
+                                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1" style="">
+                                        <a class="dropdown-item d-flex align-items-center" href="{% url 'view_prediction' prediction.id %}">
+                                            <svg class="dropdown-icon text-gray-400 me-2"  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                              </svg>
+                                            View Details
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="{% url 'update_prediction' prediction.id %}">
+                                            <svg class="dropdown-icon text-gray-400 me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                              </svg>
+                                            Update
+                                        </a>
+                                        <a class="dropdown-item d-flex align-items-center" href="{% url 'delete_prediction' prediction.id %}">
+                                                <svg class="dropdown-icon text-gray-400 me-2"  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                                  </svg>
+                                            Delete
+                                        </a>
+                                        {% if prediction.patient %}
+                                        <div role="separator" class="dropdown-divider my-1"></div>
+                                        <a class="dropdown-item d-flex align-items-center" href="{% url 'view_patient' prediction.patient.id %}">
+                                            <svg class="dropdown-icon text-gray-800 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
+                                            View Patient Record
+                                        
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                       
+                    
+                        <img height="250px" width="250px"  src="{{ prediction.uploaded_image.url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><strong class="fw-black">Prediction:</strong> PRED-{{prediction.id}}</li> 
+                                <li class="list-group-item"><strong class="fw-black">Date:</strong> {{prediction.created_at|date:'Y-m-d H:i' }}</li>
+                                <li class="list-group-item"><strong class="fw-black">Dominant Class:</strong> {{prediction.dominant_class}}</li>
+                                <li class="list-group-item"><strong class="fw-black">Patient:</strong> 
+                                {% if prediction.patient  %}
+                                {{ prediction.patient.first_name }} {{ prediction.patient.last_name }}
+                                {% else %}
+                                Unassigned
+                                {% endif%}
+                                </li>
+                                
+                            </ul>
+                           
+                        </div>
+                   
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                
+         
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
