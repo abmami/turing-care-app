@@ -34,7 +34,7 @@ TuringCare uses open source projects and frameworks to work properly:
 - [TensorFlow] - a free and open-source software library for machine learning and artificial intelligence.
 - [Volt Django Dashboard] - a free and open source Django Dashboard Template.
 
-And of course TuringCare itself is open source with a [public repository][dill]
+And of course TuringCare itself is open source with a [public repository](https://github.com/abdessalemmami/turing-care-app)
  on GitHub.
 
 ## Installation
@@ -46,7 +46,7 @@ And of course TuringCare itself is open source with a [public repository][dill]
 
 **Step 3:** Clone Repo
 ```bash
-git clone https://github.com/joemccann/dillinger.git
+git clone https://github.com/abdessalemmami/turing-care-app.git
 ```
 **Step 4:** Install Node Modules 
 ```bash
@@ -91,8 +91,8 @@ MIT
 
 [//]: # (refs)
 
-   [TuringCare]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
+   [TuringCare]: <https://github.com/abdessalemmami/turing-care-app>
+   [git-repo-url]: <https://github.com/abdessalemmami/turing-care-app>
    [Django]: <https://www.djangoproject.com/>
    [Bootstrap 5]: <https://getbootstrap.com/>
    [Tensorflow]: <https://www.tensorflow.org/>
