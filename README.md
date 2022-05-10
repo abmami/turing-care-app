@@ -44,11 +44,11 @@ And of course TuringCare itself is open source with a [public repository](https:
 - [Gulp](https://gulpjs.com/) - globally 
     - `npm install -g gulp-cli`
 
-**Step 3:** Clone Repo
+**Step 2:** Clone Repo
 ```bash
 git clone https://github.com/abdessalemmami/turing-care-app.git
 ```
-**Step 4:** Install Node Modules 
+**Step 3:** Install Node Modules 
 ```bash
 cd apps/static/assets
 npm install
