@@ -78,11 +78,11 @@ python manage.py runserver
 Access the web app in your preferred browser (http://127.0.0.1:8000/) and that's it!
 
 ## Team
-- [Arij Boubaker](https://www.linkedin.com/in/arij-boubaker/) - AI Enginnering Student, ESPRIT
-- [Abdessalem Mami](https://www.linkedin.com/in/abdessalem-mami/) - AI Enginnering Student, ESPRIT
-- [Adem Boukhris](https://www.linkedin.com/) - AI Enginnering Student, ESPRIT
-- [Mohamed Fathallah](https://www.linkedin.com/in/medfathallah/) - AI Enginnering Student, ESPRIT
-- [Firas Soltani](https://www.linkedin.com/) - AI Enginnering Student, ESPRIT
+- [Arij Boubaker](https://www.linkedin.com/in/arij-boubaker/) - AI Engineering Student, ESPRIT
+- [Abdessalem Mami](https://www.linkedin.com/in/abdessalem-mami/) - AI Engineering Student, ESPRIT
+- [Adem Boukhris](https://www.linkedin.com/) - AI Engineering Student, ESPRIT
+- [Mohamed Fathallah](https://www.linkedin.com/in/medfathallah/) - AI Engineering Student, ESPRIT
+- [Firas Soltani](https://www.linkedin.com/) - AI Engineering Student, ESPRIT
 
 ## License
 MIT
